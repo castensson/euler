@@ -1,21 +1,25 @@
 package se.castensson.euler;
 
+import java.io.IOException;
+
 import se.castensson.utils.HelperFunctions;
 
 public class ProjectEuler {
 
 	/**
 	 * @param args
+	 * @throws IOException 
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		ProjectEuler pe = new ProjectEuler();
-		// pe.eulerProblem1(1000);
-		// pe.eulerProblem2(4000000);
-		// pe.eulerProblem3(600851475143L);
-		pe.eulerProblem4(100, 999);
-		// pe.eulerProblem5(20);
-		// pe.eulerProblem6(100);
-		// pe.eulerProblem7(10001);
+//		 pe.eulerProblem1(1000);
+//		 pe.eulerProblem2(4000000);
+//		 pe.eulerProblem3(600851475143L);
+//		 pe.eulerProblem4(100, 999);
+//		 pe.eulerProblem5(20);
+//		 pe.eulerProblem6(100);
+//		 pe.eulerProblem7(10001);
+		pe.eulerProblem8(5);
 	}
 
 	public void eulerProblem1(long maxNumber) {
@@ -120,6 +124,24 @@ public class ProjectEuler {
 		}
 		printResult(7, highestPrime, startTime);
 	}
+	
+	public void eulerProblem8(int numberOfFactors)
+			throws IOException {
+		long startTime = System.currentTimeMillis();
+		String stringOfNumber = HelperFunctions.readFileAsString("1000.txt", false);
+		long highestProduct = 0;
+		for (int i = 0; i < stringOfNumber.length() - numberOfFactors + 1; i++) {
+			int product = Integer.parseInt(String.valueOf(stringOfNumber.charAt(i)));
+			for (int j = i + 1; j < i + numberOfFactors; j++) {
+				product = product * Integer.parseInt(String.valueOf(stringOfNumber.charAt(j)));
+			}
+			if (highestProduct < product) {
+				highestProduct = product;
+			}
+		}
+		printResult(8, highestProduct, startTime);
+	}
+
 
 	private void printResult(int number, long answer, long time) {
 		System.out.println(String.format("Euler Problem %s answer: %s (%s ms)", number, answer, System.currentTimeMillis() - time));

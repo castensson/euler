@@ -1,5 +1,9 @@
 package se.castensson.utils;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class HelperFunctions {
 
 	/**
@@ -46,4 +50,28 @@ public class HelperFunctions {
 		}
 		return false;
 	}
+	
+	public static String readFileAsString(String resource, boolean keepLineBreaks)
+			throws IOException {
+		BufferedReader reader = new BufferedReader(new InputStreamReader(ClassLoader.getSystemResourceAsStream("resources/" + resource)));
+		StringBuffer resultString = new StringBuffer();
+		String line = null;
+		while ((line = reader.readLine()) != null) {
+			resultString.append(line);
+			if (keepLineBreaks) {
+				resultString.append("\n");
+			}
+		}
+		return resultString.toString();
+	}
+
+	public static void main(String[] args) {
+		try {
+			System.out.println(readFileAsString("1000.txt", false));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 }

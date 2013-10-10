@@ -19,7 +19,8 @@ public class ProjectEuler {
 //		 pe.eulerProblem5(20);
 //		 pe.eulerProblem6(100);
 //		 pe.eulerProblem7(10001);
-		pe.eulerProblem8(5);
+//		pe.eulerProblem9();
+		pe.eulerProbem10(2000000);
 	}
 
 	public void eulerProblem1(long maxNumber) {
@@ -141,7 +142,37 @@ public class ProjectEuler {
 		}
 		printResult(8, highestProduct, startTime);
 	}
+	
+	public void eulerProblem9(){
+		long startTime = System.currentTimeMillis();
+		int answer = 0;
+		
+		int c = 997;
+		do{
+			for(int b = 2; b < c; b++){
+				for(int a = 1; a < b; a++) {
+					if(a*a + b*b == c*c && a + b + c == 1000){
+						System.out.println(String.format("A = %s,  B = %s, C = %s, %s ? %s, %s)", a, b, c, a*a + b*b, c*c, a*b*c));
+						answer = a*b*c;
+					}
+				}
+			}
+			c--;
+		} while (c > 333);		
+		
+		printResult(9, answer, startTime);
+	}
 
+	public void eulerProbem10(int max){
+		long startTime = System.currentTimeMillis();
+		long sum = 0;
+		for(int i = 2; i < max; i++){
+			if(HelperFunctions.isPrime(i)){
+				sum += i;
+			}
+		}
+		printResult(10, sum, startTime);
+	}
 
 	private void printResult(int number, long answer, long time) {
 		System.out.println(String.format("Euler Problem %s answer: %s (%s ms)", number, answer, System.currentTimeMillis() - time));
